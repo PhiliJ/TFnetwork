@@ -1,10 +1,11 @@
 Package: TFnetwork
-Title: Construct TF-Target Network Based on TF activity and Target Gene Expression
+Title: Construct TF-Target Network Based on TF activity (based on NetAct) and Target Gene Expression
 Version: 0.1.0
 Authors@R: 
     person("Li", "Lei", , "910165897@qq.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Construct TF-Target Network Based on TF activity and Target Gene Expression.
+Description: Construct TF-Target Network Based on TF activity (based on NetAct:https://github.com/lusystemsbio/NetAct) and Target Gene Expression 
+and plot TF-target network based on igraph (https://github.com/igraph/rigraph). A huge thanks!
 License: `use_gpl3_license()`
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
