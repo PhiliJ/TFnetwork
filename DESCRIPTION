@@ -1,0 +1,15 @@
+Package: TFnetwork
+Title: Construct TF-Target Network Based on TF activity and Target Gene Expression
+Version: 0.1.0
+Authors@R: 
+    person("Li", "Lei", , "910165897@qq.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Construct TF-Target Network Based on TF activity and Target Gene Expression.
+License: `use_gpl3_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: org.Mm.eg.db, org.Hs.eg.db, edgeR, AnnotationDbi, DESeq2,
+         NetAct, ggplot2, circlize, ComplexHeatmap, magrittr, dplyr,
+		 igraph, rgl
+LazyData: true
