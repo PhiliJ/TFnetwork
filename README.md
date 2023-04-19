@@ -7,8 +7,6 @@
 
 Li Lei <2020320243@stu.cqmu.edu.cn>
 
-### Ph.D. supervisor
-
 Yajun Xie <yjxie@cqmu.edu.cn>
 
 Qin Zhou <zhouqin@cqmu.edu.cn>
@@ -99,7 +97,7 @@ data("mDB")
 ```
 
 Then, use `TF_Selection_p` to do the GSEA and select the TF with P-value as cutoff.
-If you want to use q-value as cutoff instead, just use `TF_Selection` in NetAct.
+If you want to use q-value as cutoff instead, just use `TF_Selection` in `NetAct`.
 You can use `?TF_Selection_p` for details.
 
 ``` r
@@ -114,7 +112,7 @@ tfs
 ```
 
 In case where more or fewer TFs are needed, you can use `Reselect_TFs_p` to re-select the TF with P-value as cutoff.
-If you want to use q-value as cutoff instead, just use `Reselect_TFs` in NetAct.
+If you want to use q-value as cutoff instead, just use `Reselect_TFs` in `NetAct`.
 You can use `?Reselect_TFs_p` for details.
 
 ``` r
@@ -122,6 +120,73 @@ tfs <- Reselect_TFs_p(GSEArslt = gsearslts$GSEArslt, pval = 0.01)
 tfs
 ```
 
+#### 3.2 Calculate the activities of the selected TFs
+TF activities are calculated using `TF_Activity` in `NetAct`.
+
+``` r
+neweset <- Biobase::ExpressionSet(assayData = as.matrix(DErslt$e), phenoData = phenoData)
+act.me <- TF_Activity(tfs, mDB, neweset, DErslt)
+acts_mat = act.me$all_activities
+```
+
+Then, use `TF_heatmap` to draw the heatmap with TF activities and expressions.
+
+``` r
+pdf("TF_heatmap.pdf", width = 4, height = 20)
+heatmap2 <- TF_heatmap(acts_mat, neweset)
+heatmap2
+dev.off()
+```
 
 
+### Step 4 TF-Target Network
+#### 4.1 Construct TF-target network
+To avoid having too many TFs in the network, you might consider selecting only the most relevant TFs to include in the network visualization.
 
+``` r
+tfs <- Reselect_TFs_p(GSEArslt = gsearslts$GSEArslt, pval = 0.00001)
+tfs
+```
+
+Then, use `Cons_net` to construct the network. This will also return an '.txt' file contains TF-target, and you can use this to generate network plot
+using other software like `Cytoscape`.
+
+``` r
+Cons_net(mouse = TRUE)
+```
+
+#### 4.2 Plot TF-target network
+Use `plot_tfnetwork`. You may need to check the details using `?plot_tfnetwork`.
+
+``` r
+plot_tfnetwork(net,
+               pdf.name = "TFnet.pdf",
+               nodeshape = "circle",
+               pdf.height = 15,
+               pdf.width = 15,
+               edge.arrow.size = 0.3,
+               vertex.label.family = "sans")
+``` 
+
+#### 4.3 Highlight nodes of interest
+Use `plot_highlighted_tfnetwork`. `TFnetwork` will automatically determine whether your node of interest is a TF or a target. You may need to check the details using `?plot_highlighted_tfnetwork`.
+For example:
+
+``` r
+plot_highlighted_tfnetwork(network, highlight_node = "Gli2")
+``` 
+
+#### 4.4 Plot interactive network
+Use `plot_interactive_tfnetwork`. 
+
+``` r
+plot_interactive_tfnetwork(network,
+                           canvas.width = 500, 
+                           canvas.height = 500)
+``` 
+
+#### 4.4 Plot 3D network
+
+``` r
+plot_3d_tfnetwork(network)
+``` 
