@@ -22,13 +22,14 @@ library(devtools)
 install_github("PhiliJ/TFnetwork", dependencies = T)
 ``` 
 
-### Step 1
-#### Prepare the expreesion matrix for later analyses
+### Step 1 Preparation of expreesion matrix for later analyses
+#### 1.1 Set up input and comparisons
 
 For example, for treated group and NC group:
 
 First thing first, you will need to prepare the expression table of genes. The first row of the table should be ENSEMBL or ENTREZID, and the second row
 should be the row count of each gene, then name these table like below.
+
 Then, you will need to define variables for expression data files, sample names, group assignments, and a comparison to be made between groups for later analyses.
 
 ``` r
@@ -37,4 +38,23 @@ files <- c("nc1.txt", "nc2.txt", "nc3.txt",
 samplenames <- c("nc1", "nc2", "nc3", "treat1", "treat2", "treat3")
 group <- as.factor(c("nc", "nc", "nc", "treat", "treat", "treat"))
 compList <- c("treat-nc")
+```
+
+#### 1.2 Set up expression matrix and phenodata
+After that, use `Cons_exp` to construct expression matrix (x) for later analyses, then add phenodata in x.
+
+``` r
+x <- Cons_exp(files, group, samplenames, compList)
+
+phenoData <- new("AnnotatedDataFrame", data = data.frame(celltype = group))
+rownames(phenoData) <- colnames(x$counts)
+```
+
+#### 1.3 Preprocess expression counts
+Use `pre` to pre-process the expression data. It filters out lowly expressed genes and retrieves associated gene symbols for raw count data. 
+This function is based on `Preprocess_counts` function in `NetAct` package, but allows users to adjust `min.count`, `min.total.count`, `large.n` and `min.prop`.
+You can use `?pre` for details.
+
+``` r
+counts <- pre(counts = x$counts, groups = group, mouse = TRUE)
 ```
