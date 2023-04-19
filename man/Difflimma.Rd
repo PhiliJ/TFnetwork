@@ -7,27 +7,25 @@
 Difflimma(counts, phenodata, complist, logfc = 1, pval = 0.05, padj = TRUE)
 }
 \arguments{
-\item{counts}{Processed gene expression count data}
+\item{counts}{A matrix of raw counts.}
 
-\item{phenodata}{pData that provides batch & experimental conditions}
+\item{phenodata}{A data frame containing phenotype information.}
 
-\item{complist}{a vector of multiple comparisons in the format of contrasts in limma (e.g. c("A-B", "A-C", "B-C"))}
+\item{complist}{A list of comparisons to be performed.}
 
-\item{logfc}{(optional) log fold change constraints for DEGs}
+\item{logfc}{A numeric value indicating the log fold change threshold (default: 1).}
 
-\item{pval}{P-value cutoff for DEG analysis (default: 0.05)}
+\item{pval}{A numeric value indicating the p-value threshold (default: 0.05).}
 
-\item{padj}{Use adjusted p-value or not (default: TRUE)}
+\item{padj}{A logical value indicating whether to adjust p-values (default: TRUE).}
 }
 \value{
-DEresult: a list of DEG results, including those for each single comparison and those for the overall comparison.
-Each DEG result is in the format of A list containing:
-table: table of DEG results.
-rank_vector: a vector of t-statistics for every gene.
-degs: a vector of gene symbols for DEGs.
-e: expression data (CPM).
-e_batch: batch corrected expression.
+A list containing the following elements:
+\item{table}{The differential expression table.}
+\item{rank_vector}{A rank vector.}
+\item{degs}{A list of differentially expressed genes.}
+\item{e}{Normalized expression values.}
 }
 \description{
-DEG Analysis of RNA-seq Data using limma + Voom with P value
+This function performs differential expression analysis using the limma package. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

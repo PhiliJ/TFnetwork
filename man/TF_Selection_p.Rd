@@ -2,7 +2,7 @@
 % Please edit documentation in R/NetAct.R
 \name{TF_Selection_p}
 \alias{TF_Selection_p}
-\title{Identifying enriched TFs using Gene Set Enrichment Analysis (GSEA) -- a wrapper function with many options}
+\title{TF selection with P-value}
 \usage{
 TF_Selection_p(
   GSDB,
@@ -43,5 +43,5 @@ GSEArslt: a dataframe of GSEA results (see TF_GSEA).
 tfs: a vector of selected TFs.
 }
 \description{
-Identifying enriched TFs using Gene Set Enrichment Analysis (GSEA) -- a wrapper function with many options
+Identifying enriched TFs using Gene Set Enrichment Analysis (GSEA) with P-value as the cutoff. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

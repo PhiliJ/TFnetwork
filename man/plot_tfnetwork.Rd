@@ -29,11 +29,51 @@ plot_tfnetwork(
 )
 }
 \arguments{
-\item{nodeshape}{shape of the nodes}
+\item{net}{A data frame that contains information about the transcription factors and their target genes. It should have two columns: "TF" and "Target".}
+
+\item{nodeshape}{The shape of the nodes. Default is "circle". If you want to draw a 3D plot, use "sphere" instead.}
+
+\item{TF_color}{The color of the transcription factor nodes. Default is "#F0E442".}
+
+\item{Up_color}{The color of the upregulated target gene nodes. Default is "#fb8072".}
+
+\item{Down_color}{The color of the downregulated target gene nodes. Default is "#80b1d3".}
+
+\item{TF_alpha}{The alpha value of the transcription factor nodes. Default is 0.75.}
+
+\item{Up_alpha}{The alpha value of the upregulated target gene nodes. Default is 0.3.}
+
+\item{Down_alpha}{The alpha value of the downregulated target gene nodes. Default is 0.3.}
+
+\item{TF_size}{The size of the transcription factor nodes. Default is 10.}
+
+\item{Target_size}{The size of the target gene nodes. Default is 8.}
+
+\item{TF_labelsize}{The label size of the transcription factor nodes. Default is 0.7.}
+
+\item{Target_labelsize}{The label size of the target gene nodes. Default is 0.7.}
+
+\item{label_color}{The color of the node labels. Default is "black".}
+
+\item{edge_color}{The color of the edges. Default is "grey".}
+
+\item{edge_alpha}{The alpha value of the edges. Default is 0.75.}
+
+\item{netlayout}{The layout of the network.  Default is NULL, and the function will calculate the layout using the Kamada-Kawai algorithm.}
+
+\item{pdf.name}{The name of the PDF file to be saved. Default is "TFnet.pdf".}
+
+\item{pdf.height}{The height of the PDF file. Default is 15.}
+
+\item{pdf.width}{The width of the PDF file. Default is 15.}
+
+\item{edge.arrow.size}{The size of the arrows on the edges. Default is 0.4.}
+
+\item{vertex.label.family}{The font family of the node labels. Default is "sans".}
 }
 \value{
 TFnet.pdf: network plot
 }
 \description{
-Plot TF-Target network
+This function plots a transcription factor regulatory network, including transcription factors and their target genes. The network is based on a given data frame that contains information about the transcription factors and their target genes.
 }

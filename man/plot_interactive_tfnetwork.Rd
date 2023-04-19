@@ -2,7 +2,7 @@
 % Please edit documentation in R/TF_network.R
 \name{plot_interactive_tfnetwork}
 \alias{plot_interactive_tfnetwork}
-\title{Plot interactive TF network}
+\title{Plot an interactive TF network using tkplot from igraph}
 \usage{
 plot_interactive_tfnetwork(
   network,
@@ -12,11 +12,17 @@ plot_interactive_tfnetwork(
 )
 }
 \arguments{
-\item{network}{TF network}
+\item{network}{The igraph object representing the TF network to be plotted}
+
+\item{canvas.width}{The width of the canvas for the tkplot window}
+
+\item{canvas.height}{The height of the canvas for the tkplot window}
+
+\item{vertex.label.family}{The font family to use for vertex labels}
 }
 \value{
 interactive TF network plot
 }
 \description{
-Plot interactive TF network
+This function plots an interactive transcription factor (TF) network using the tkplot function from the igraph package. The resulting plot can be manipulated using mouse gestures and keyboard commands.
 }

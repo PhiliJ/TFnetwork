@@ -7,11 +7,17 @@
 Cons_exp(files, group, samplenames, compList)
 }
 \arguments{
-\item{files}{pre-defined inputs}
+\item{files}{A vector containing the file names of the data.}
+
+\item{group}{A factor vector indicating the group membership of each sample.}
+
+\item{samplenames}{A vector containing the names of the samples.}
+
+\item{compList}{A character vector specifying the comparison of interest.}
 }
 \value{
 x: expression matrix for later analysis
 }
 \description{
-Construct expression matrix
+Construct expression matrix for later analysis. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

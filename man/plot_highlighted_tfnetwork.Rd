@@ -2,7 +2,7 @@
 % Please edit documentation in R/TF_network.R
 \name{plot_highlighted_tfnetwork}
 \alias{plot_highlighted_tfnetwork}
-\title{Plot highlighted TF network}
+\title{Plot a TF network with highlighted TF or target gene node}
 \usage{
 plot_highlighted_tfnetwork(
   network,
@@ -16,11 +16,36 @@ plot_highlighted_tfnetwork(
 )
 }
 \arguments{
-\item{highlight_node}{The key node you want to highlight}
+\item{network}{A graph object representing the TF network, created using the igraph package.}
+
+\item{highlight_node}{A character string representing the name of the node to be highlighted in the network plot. This can be either a TF or a target gene.}
+
+\item{highlight_TF_color}{A character string representing the color to be used for highlighting the TF node. Default is "#f19d00".}
+
+\item{highlight_edge_color}{A character string representing the color to be used for highlighting the edges connected to the highlighted node. Default is "#e41a1c".}
+
+\item{netlayout}{A layout object representing the layout of the network. Default is NULL, and the function will calculate the layout using the Kamada-Kawai algorithm.}
+
+\item{pdf_height}{An integer representing the height of the PDF output file in inches. Default is 15.}
+
+\item{pdf_width}{An integer representing the width of the PDF output file in inches. Default is 15.}
+
+\item{vertex_label_family}{A character string representing the font family for the vertex labels in the network plot. Default is "sans".}
 }
 \value{
-TF_highlight.pdf: highlighted network plot
+This function outputs a PDF file of the network plot with the highlighted node and its connected edges colored differently.
 }
 \description{
-Plot highlighted TF network
+This function plots a transcription factor (TF) network with a specified TF or target gene node highlighted in a different color. The function takes as input the network and the node to be highlighted, and outputs a PDF file of the network plot with the highlighted node and its connected edges colored differently.
+}
+\examples{
+# Load example network and DE results
+data(net)
+data(DErslt)
+
+# Plot the network with the TF node "FOXA1" highlighted
+plot_highlighted_tfnetwork(net, highlight_node = "FOXA1")
+
+# Plot the network with the target gene node "IGFBP3" highlighted
+plot_highlighted_tfnetwork(net, highlight_node = "IGFBP3")
 }

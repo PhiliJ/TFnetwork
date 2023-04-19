@@ -2,7 +2,7 @@
 % Please edit documentation in R/NetAct.R
 \name{TF_heatmap}
 \alias{TF_heatmap}
-\title{Plotting TF gene expresion & activity heatmap}
+\title{TF reselection with P-value}
 \usage{
 TF_heatmap(
   new_activity,
@@ -14,21 +14,21 @@ TF_heatmap(
 )
 }
 \arguments{
-\item{new_activity}{Matrix. TF activity matrix}
+\item{new_activity}{a numeric matrix or data.frame containing the activity values of transcription factors (TFs)}
 
-\item{eset}{ExpressionSet of gene expression data}
+\item{eset}{an ExpressionSet or numeric matrix or data.frame containing the expression values of genes}
 
-\item{activity_range}{Range of activity in heatmap}
+\item{activity_range}{a vector with three elements specifying the range of the activity values of TFs for color scaling}
 
-\item{activity_color}{Colors of activity in heatmap}
+\item{activity_color}{a vector with three colors specifying the color scheme for the activity heatmap}
 
-\item{exp_range}{Range of gene expression Z-score in heatmap}
+\item{exp_range}{a vector with three elements specifying the range of the expression values of genes for color scaling}
 
-\item{exp_color}{Colors of gene expression Z-score in heatmap}
+\item{exp_color}{a vector with three colors specifying the color scheme for the expression heatmap}
 }
 \value{
-Heatmap plotting object
+A heatmap object generated from the given TF activity and gene expression data
 }
 \description{
-Plotting TF gene expresion & activity heatmap
+Plotting heatmap of TF activity & TF gene expresion. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

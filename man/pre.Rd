@@ -15,11 +15,23 @@ pre(
 )
 }
 \arguments{
-\item{mouse}{use mouse genome or not}
+\item{counts}{A matrix or data frame containing the raw count data.}
+
+\item{groups}{A factor vector indicating the group membership of each sample.}
+
+\item{mouse}{A logical indicating whether the input data is from mouse or human.}
+
+\item{min.count}{The minimum number of counts for a gene to be considered expressed in a sample.}
+
+\item{min.total.count}{The minimum total count across all samples for a gene to be considered expressed.}
+
+\item{large.n}{The threshold number of samples in which a gene must be expressed to avoid filtering due to low expression.}
+
+\item{min.prop}{The minimum proportion of samples in which a gene must be expressed to avoid filtering due to low expression.}
 }
 \value{
 x$counts: processed count matrix
 }
 \description{
-Preprocess expression coutns
+Preprocess expression coutns. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

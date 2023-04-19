@@ -7,24 +7,28 @@
 DiffDESeq2(counts, phenodata, complist, logfc = 0, pval = 0.05, padj = TRUE)
 }
 \arguments{
-\item{counts}{Processed gene expression count data}
+\item{counts}{A count matrix where rows are genes and columns are samples.}
 
-\item{phenodata}{pData that provides batch & experimental conditions}
+\item{phenodata}{A data frame containing the phenotype data for each sample.}
 
-\item{complist}{a vector of multiple comparisons in the format of contrasts in limma (e.g. c("A-B", "A-C", "B-C"))}
+\item{complist}{A character vector containing the names of the samples to compare.}
 
-\item{pval}{p-value cutoff for DEG analysis (default: 0.05)}
+\item{logfc}{The log2 fold change cutoff for differential expression. Default is 0.}
 
-\item{padj}{Use adjusted p-value or not (default: TRUE)}
+\item{pval}{The adjusted p-value or p-value cutoff for differential expression. Default is 0.05.}
+
+\item{padj}{Logical indicating whether to use adjusted p-values or not. Default is TRUE.}
 }
 \value{
-DEresult: a list of DEG results, including those for each single comparison and those for the overall comparison.
-Each DEG result is in the format of A list containing:
-table: table of DEG results.
-rank_vector: a vector of t-statistics for every gene.
-degs: a vector of gene symbols for DEGs.
-e: expression data (CPM).
+DEresult: A list containing the following items:
+table: A data frame with the results of the differential expression analysis.
+rank_vector: A vector containing the rank of each gene based on the effect size.
+degs: A character vector containing the names of the differentially expressed genes.
+e: A matrix of normalized expression values.
+up: A character vector containing the names of the upregulated genes.
+down: A character vector containing the names of the downregulated genes.
+nosig: A character vector containing the names of the non-differentially expressed genes.
 }
 \description{
-DEG Analysis of RNA-seq Data using DESeq with P value
+This function performs differential expression analysis using the DESeq2 package.
 }

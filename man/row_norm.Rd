@@ -13,5 +13,5 @@ row_norm(data)
 norm_data: standardized gene expression matrix
 }
 \description{
-Row normalization (standardization)
+Row normalization of gene expression matrix. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

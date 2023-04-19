@@ -2,7 +2,7 @@
 % Please edit documentation in R/NetAct.R
 \name{Reselect_TFs_p}
 \alias{Reselect_TFs_p}
-\title{Reselecting TFs using gene set enrichement analysis (GSEA) using an adjusted set of parameters (work together with TF_Selection)}
+\title{TF reselection with P-value}
 \usage{
 Reselect_TFs_p(GSEArslt, pval = 0.05, combine_TFs = TRUE, ntop = NULL)
 }
@@ -19,5 +19,5 @@ Reselect_TFs_p(GSEArslt, pval = 0.05, combine_TFs = TRUE, ntop = NULL)
 tfs: a vector of selected TFs
 }
 \description{
-Reselecting TFs using gene set enrichement analysis (GSEA) using an adjusted set of parameters (work together with TF_Selection)
+Reselecting TFs using gene set enrichement analysis (GSEA) using an adjusted set of parameters (work together with TF_Selection). The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 }

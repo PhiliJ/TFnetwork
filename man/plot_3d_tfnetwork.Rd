@@ -2,16 +2,19 @@
 % Please edit documentation in R/TF_network.R
 \name{plot_3d_tfnetwork}
 \alias{plot_3d_tfnetwork}
-\title{Plot 3D TF network}
+\title{Plot a 3D TF network using tkplot from igraph}
 \usage{
 plot_3d_tfnetwork(network)
 }
 \arguments{
-\item{network}{TF network}
+\item{network}{an igraph object representing the network to plot}
 }
 \value{
-3d TF network plot
+A 3D network graph plot.
 }
 \description{
-Plot 3D TF network
+This function plots the input network as a 3D network graph using the rgl package.
+}
+\examples{
+plot_3d_tfnetwork(network)
 }

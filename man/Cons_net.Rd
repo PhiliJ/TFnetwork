@@ -2,16 +2,18 @@
 % Please edit documentation in R/TF_network.R
 \name{Cons_net}
 \alias{Cons_net}
-\title{Contruct Network for plotting}
+\title{Construct Network for plotting}
 \usage{
 Cons_net(mouse = FALSE)
 }
 \arguments{
-\item{mouse}{use mouse genome or not}
+\item{mouse}{A logical indicating whether to construct the network for mouse or human. Default is FALSE for human.}
 }
 \value{
 net: TF-Target network
+
+The constructed network to a file named "TF_Network.txt"
 }
 \description{
-Contruct Network for plotting
+It constructs the TF-Target network and returns network file ("TF_Network.txt") if you want to plot your network using other software like Cytoscape.
 }
