@@ -1,1 +1,3 @@
-# TFnetwork
+## TFnetwork
+`TFnetwork` is a R package for Differential-expression analysis (DE-analysis), construction of core transcription-factor(TF) regulatory network (based on NetAct: https://github.com/lusystemsbio/NetAct) and core TF-target network plotting, all in one. What you need to do is simple: just input the expression matrix, and you will get the differentially-expression genes(DEGs), TFs with altered activity, a heatmap for TF activity and expression, TF-target network file and network plot.
+`TFnetwork` is licensed under the GNU General Public License v3.0 https://github.com/PhiliJ/TFnetwork/blob/main/LICENSE
