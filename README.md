@@ -85,9 +85,43 @@ DErslt = Difflimma (counts = counts, phenodata = phenoData, complist = compList,
                      logfc = 3, pval = 0.001, padj = TRUE)
                      
 write.table(DErslt$table, file = "limma_result.txt", sep = "\t", row.names = FALSE)
-``` r
+```
 
 
 ### Step 3 Identify significantly enriched TFs using NetAct
-#### 
+#### 3.1 TF GSEA
+
+First, you need to use the command `data("mDB")` to call the `mDB` dataset for mouse
+or `data("hDB")` to call the `hDB` dataset for humans in R.
+
+``` r
+data("mDB")
+```
+
+Then, use `TF_Selection_p` to do the GSEA and select the TF with P-value as cutoff.
+If you want to use q-value as cutoff instead, just use `TF_Selection` in NetAct.
+You can use `?TF_Selection_p` for details.
+
+``` r
+gsearslts <- TF_Selection_p(GSDB = mDB, DErslt = DErslt, minSize = 5, nperm = 1000,
+                            pval = 0.05, compList = compList, method = "binary",
+                            nameFile = "TF_GSEA")
+
+write.table(gsearslts$GSEArslt, file = "TF_GSEA.txt", sep = "\t", row.names = FALSE)
+
+tfs <- gsearslts$tfs
+tfs
+```
+
+In case where more or fewer TFs are needed, you can use `Reselect_TFs_p` to re-select the TF with P-value as cutoff.
+If you want to use q-value as cutoff instead, just use `Reselect_TFs` in NetAct.
+You can use `?Reselect_TFs_p` for details.
+
+``` r
+tfs <- Reselect_TFs_p(GSEArslt = gsearslts$GSEArslt, pval = 0.01)
+tfs
+```
+
+
+
 
