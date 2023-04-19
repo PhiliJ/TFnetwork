@@ -1,12 +1,16 @@
 #' @title Construct expression matrix
-#' @description Construct expression matrix
-#' @param files pre-defined inputs
+#' @description Construct expression matrix for later analysis. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
+#' @param files A vector containing the file names of the data.
+#' @param group A factor vector indicating the group membership of each sample.
+#' @param samplenames A vector containing the names of the samples.
+#' @param compList A character vector specifying the comparison of interest. 
 #' @return x: expression matrix for later analysis
 #' @export
 #' @import edgeR
 #' @import org.Mm.eg.db
 #' @import org.Hs.eg.db
 #' @import AnnotationDbi
+
 Cons_exp <- function(files, group, samplenames, compList) {
   x <- edgeR::readDGE(files, columns=c(1,2))
   x$samples$group <- as.factor(group)
@@ -15,8 +19,14 @@ Cons_exp <- function(files, group, samplenames, compList) {
 }
 
 #' @title Preprocess expression coutns
-#' @description Preprocess expression coutns
-#' @param mouse use mouse genome or not
+#' @description Preprocess expression coutns. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
+#' @param counts A matrix or data frame containing the raw count data.
+#' @param groups A factor vector indicating the group membership of each sample.
+#' @param mouse A logical indicating whether the input data is from mouse or human.
+#' @param min.count The minimum number of counts for a gene to be considered expressed in a sample.
+#' @param min.total.count The minimum total count across all samples for a gene to be considered expressed.
+#' @param large.n The threshold number of samples in which a gene must be expressed to avoid filtering due to low expression.
+#' @param min.prop The minimum proportion of samples in which a gene must be expressed to avoid filtering due to low expression.
 #' @return x$counts: processed count matrix
 #' @export
 #' @import edgeR
@@ -67,17 +77,22 @@ pre <- function(counts, groups, mouse = FALSE,
 }
 
 #' @title DEG Analysis of RNA-seq Data using DESeq with P value
-#' @param counts Processed gene expression count data
-#' @param phenodata pData that provides batch & experimental conditions
-#' @param complist a vector of multiple comparisons in the format of contrasts in limma (e.g. c("A-B", "A-C", "B-C"))
-#' @param pval p-value cutoff for DEG analysis (default: 0.05)
-#' @param padj Use adjusted p-value or not (default: TRUE)
-#' @return DEresult: a list of DEG results, including those for each single comparison and those for the overall comparison.
-#'         Each DEG result is in the format of A list containing:
-#'         table: table of DEG results.
-#'         rank_vector: a vector of t-statistics for every gene.
-#'         degs: a vector of gene symbols for DEGs.
-#'         e: expression data (CPM).
+#' @description This function performs differential expression analysis using the DESeq2 package.
+#' @param counts A count matrix where rows are genes and columns are samples.
+#' @param phenodata A data frame containing the phenotype data for each sample.
+#' @param complist A character vector containing the names of the samples to compare.
+#' @param logfc The log2 fold change cutoff for differential expression. Default is 0.
+#' @param pval The adjusted p-value or p-value cutoff for differential expression. Default is 0.05.
+#' @param padj Logical indicating whether to use adjusted p-values or not. Default is TRUE.
+#' @import DESeq2
+#' @return DEresult: A list containing the following items:
+#' table: A data frame with the results of the differential expression analysis.
+#' rank_vector: A vector containing the rank of each gene based on the effect size.
+#' degs: A character vector containing the names of the differentially expressed genes.
+#' e: A matrix of normalized expression values.
+#' up: A character vector containing the names of the upregulated genes.
+#' down: A character vector containing the names of the downregulated genes.
+#' nosig: A character vector containing the names of the non-differentially expressed genes.
 #' @export
 #' @import DESeq2
 DiffDESeq2 = function(counts, phenodata, complist,logfc = 0, pval = 0.05, padj = TRUE ) {
@@ -121,19 +136,19 @@ DiffDESeq2 = function(counts, phenodata, complist,logfc = 0, pval = 0.05, padj =
 }
 
 #' @title DEG Analysis of RNA-seq Data using limma + Voom with P value
-#' @param counts Processed gene expression count data
-#' @param phenodata pData that provides batch & experimental conditions
-#' @param complist a vector of multiple comparisons in the format of contrasts in limma (e.g. c("A-B", "A-C", "B-C"))
-#' @param logfc (optional) log fold change constraints for DEGs
-#' @param pval P-value cutoff for DEG analysis (default: 0.05)
-#' @param padj Use adjusted p-value or not (default: TRUE)
-#' @return DEresult: a list of DEG results, including those for each single comparison and those for the overall comparison.
-#'         Each DEG result is in the format of A list containing:
-#'         table: table of DEG results.
-#'         rank_vector: a vector of t-statistics for every gene.
-#'         degs: a vector of gene symbols for DEGs.
-#'         e: expression data (CPM).
-#'         e_batch: batch corrected expression.
+#' @description This function performs differential expression analysis using the limma package. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
+#' @param counts A matrix of raw counts.
+#' @param phenodata A data frame containing phenotype information.
+#' @param complist A list of comparisons to be performed.
+#' @param logfc A numeric value indicating the log fold change threshold (default: 1).
+#' @param pval A numeric value indicating the p-value threshold (default: 0.05).
+#' @param padj A logical value indicating whether to adjust p-values (default: TRUE).
+#' 
+#' @return A list containing the following elements:
+#' \item{table}{The differential expression table.}
+#' \item{rank_vector}{A rank vector.}
+#' \item{degs}{A list of differentially expressed genes.}
+#' \item{e}{Normalized expression values.}
 #' @export
 #' @import edgeR
 #' @import limma

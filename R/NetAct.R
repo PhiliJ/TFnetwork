@@ -1,4 +1,5 @@
-#' Identifying enriched TFs using Gene Set Enrichment Analysis (GSEA) -- a wrapper function with many options
+#' @title TF selection with P-value
+#' @description Identifying enriched TFs using Gene Set Enrichment Analysis (GSEA) with P-value as the cutoff. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 #' @param GSDB gene set database (a list of gene sets, each of which is comprised of a vector genes)
 #' @param DErslt DEG results
 #' @param minSize the minimum number of overlapping genes required for each gene set (a gene set filtering parameter, default: 5)
@@ -57,7 +58,8 @@ TF_Selection_p = function(GSDB, DErslt, minSize=5, nperm = 5000, method = "binar
   return(output)
 }
 
-#' Reselecting TFs using gene set enrichement analysis (GSEA) using an adjusted set of parameters (work together with TF_Selection)
+#' @title TF reselection with P-value
+#' @description Reselecting TFs using gene set enrichement analysis (GSEA) using an adjusted set of parameters (work together with TF_Selection). The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 #' @param GSEArslt GSEA results from TF_Selection
 #' @param pval p-value cutoff (default: 0.05)
 #' @param combine_TFs whether combine selected TFs from multiple comparisons or not (default: TRUE)
@@ -99,7 +101,8 @@ Reselect_TFs_p = function(GSEArslt, pval = 0.05, combine_TFs = TRUE, ntop = NULL
   return(tfs)
 }
 
-#' Row normalization (standardization)
+#' @title Row normalization (standardization)
+#' @description Row normalization of gene expression matrix. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
 #' @param data gene expression matrix
 #' @export
 #' @return norm_data: standardized gene expression matrix
@@ -110,14 +113,15 @@ row_norm = function(data){
   return(norm_data)
 }
 
-#' Plotting TF gene expresion & activity heatmap
-#' @param new_activity Matrix. TF activity matrix
-#' @param eset ExpressionSet of gene expression data
-#' @param activity_range Range of activity in heatmap
-#' @param activity_color Colors of activity in heatmap
-#' @param exp_range Range of gene expression Z-score in heatmap
-#' @param exp_color Colors of gene expression Z-score in heatmap
-#' @return Heatmap plotting object
+#' @title TF reselection with P-value
+#' @description Plotting heatmap of TF activity & TF gene expresion. The code is primarily based on the NetAct package, which can be found at https://github.com/lusystemsbio/NetAct.
+#' @param new_activity a numeric matrix or data.frame containing the activity values of transcription factors (TFs)
+#' @param eset an ExpressionSet or numeric matrix or data.frame containing the expression values of genes
+#' @param activity_range a vector with three elements specifying the range of the activity values of TFs for color scaling
+#' @param activity_color a vector with three colors specifying the color scheme for the activity heatmap
+#' @param exp_range a vector with three elements specifying the range of the expression values of genes for color scaling
+#' @param exp_color a vector with three colors specifying the color scheme for the expression heatmap
+#' @return A heatmap object generated from the given TF activity and gene expression data
 #' @importFrom circlize colorRamp2
 #' @importFrom ComplexHeatmap Heatmap 
 #' @export

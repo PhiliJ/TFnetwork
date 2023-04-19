@@ -1,6 +1,8 @@
-#' @title Contruct Network for plotting
-#' @param mouse use mouse genome or not
+#' @title Construct Network for plotting
+#' @description It constructs the TF-Target network and returns network file ("TF_Network.txt") if you want to plot your network using other software like Cytoscape.
+#' @param mouse A logical indicating whether to construct the network for mouse or human. Default is FALSE for human.
 #' @return net: TF-Target network
+#' @return The constructed network to a file named "TF_Network.txt"
 #' @export
 #' @import magrittr
 #' @import dplyr
@@ -19,7 +21,28 @@ Cons_net <- function(mouse = FALSE) {
 }
 
 #' @title Plot TF-Target network
-#' @param nodeshape shape of the nodes
+#' @description This function plots a transcription factor regulatory network, including transcription factors and their target genes. The network is based on a given data frame that contains information about the transcription factors and their target genes.
+#' @param net A data frame that contains information about the transcription factors and their target genes. It should have two columns: "TF" and "Target".
+#' @param nodeshape The shape of the nodes. Default is "circle". If you want to draw a 3D plot, use "sphere" instead.
+#' @param TF_color The color of the transcription factor nodes. Default is "#F0E442".
+#' @param Up_color The color of the upregulated target gene nodes. Default is "#fb8072".
+#' @param Down_color The color of the downregulated target gene nodes. Default is "#80b1d3".
+#' @param TF_alpha The alpha value of the transcription factor nodes. Default is 0.75.
+#' @param Up_alpha The alpha value of the upregulated target gene nodes. Default is 0.3.
+#' @param Down_alpha The alpha value of the downregulated target gene nodes. Default is 0.3.
+#' @param TF_size The size of the transcription factor nodes. Default is 10.
+#' @param Target_size The size of the target gene nodes. Default is 8.
+#' @param TF_labelsize The label size of the transcription factor nodes. Default is 0.7.
+#' @param Target_labelsize The label size of the target gene nodes. Default is 0.7.
+#' @param label_color The color of the node labels. Default is "black".
+#' @param edge_color The color of the edges. Default is "grey".
+#' @param edge_alpha The alpha value of the edges. Default is 0.75.
+#' @param netlayout The layout of the network.  Default is NULL, and the function will calculate the layout using the Kamada-Kawai algorithm.
+#' @param pdf.name The name of the PDF file to be saved. Default is "TFnet.pdf".
+#' @param pdf.height The height of the PDF file. Default is 15.
+#' @param pdf.width The width of the PDF file. Default is 15.
+#' @param edge.arrow.size The size of the arrows on the edges. Default is 0.4.
+#' @param vertex.label.family The font family of the node labels. Default is "sans".
 #' @return TFnet.pdf: network plot
 #' @export
 #' @import igraph
@@ -108,19 +131,36 @@ plot_tfnetwork <- function(net,
 }
 
 
-#' @title Plot highlighted TF network
-#' @param highlight_node The key node you want to highlight
-#' @return TF_highlight.pdf: highlighted network plot
+#' @title Plot a TF network with highlighted TF or target gene node
+#' @description This function plots a transcription factor (TF) network with a specified TF or target gene node highlighted in a different color. The function takes as input the network and the node to be highlighted, and outputs a PDF file of the network plot with the highlighted node and its connected edges colored differently.
+#' @param network A graph object representing the TF network, created using the igraph package.
+#' @param highlight_node A character string representing the name of the node to be highlighted in the network plot. This can be either a TF or a target gene.
+#' @param highlight_TF_color A character string representing the color to be used for highlighting the TF node. Default is "#f19d00".
+#' @param highlight_edge_color A character string representing the color to be used for highlighting the edges connected to the highlighted node. Default is "#e41a1c".
+#' @param netlayout A layout object representing the layout of the network. Default is NULL, and the function will calculate the layout using the Kamada-Kawai algorithm.
+#' @param pdf_height An integer representing the height of the PDF output file in inches. Default is 15.
+#' @param pdf_width An integer representing the width of the PDF output file in inches. Default is 15.
+#' @param vertex_label_family A character string representing the font family for the vertex labels in the network plot. Default is "sans".
+#' @return This function outputs a PDF file of the network plot with the highlighted node and its connected edges colored differently.
 #' @export
 #' @import igraph
 #' @import magrittr
 #' @import dplyr
 #' @import ggplot2
 #' @import circlize
+#' @examples
+#' # Load example network and DE results
+#' data(net)
+#' data(DErslt)
+#'
+#' # Plot the network with the TF node "FOXA1" highlighted
+#' plot_highlighted_tfnetwork(net, highlight_node = "FOXA1")
+#'
+#' # Plot the network with the target gene node "IGFBP3" highlighted
+#' plot_highlighted_tfnetwork(net, highlight_node = "IGFBP3")
 plot_highlighted_tfnetwork <- function(network, 
                                        highlight_node, 
                                        highlight_TF_color = "#f19d00", 
-                                       #                                     highlight_Target_color = "#0072B2", 
                                        highlight_edge_color = "#e41a1c",
                                        netlayout = NULL,
                                        pdf_height = 15, 
@@ -159,7 +199,6 @@ plot_highlighted_tfnetwork <- function(network,
       }
     }
     
-    #    V(network)[connected_nodes]$color <- adjustcolor(highlight_TF_color, alpha.f = 0.7)
   }
   
   # 获取所有与 highlight_node 相连的边
@@ -189,8 +228,12 @@ plot_highlighted_tfnetwork <- function(network,
   dev.off()
 }
 
-#' @title Plot interactive TF network
-#' @param network TF network
+#' @title Plot an interactive TF network using tkplot from igraph
+#' @description This function plots an interactive transcription factor (TF) network using the tkplot function from the igraph package. The resulting plot can be manipulated using mouse gestures and keyboard commands.
+#' @param network The igraph object representing the TF network to be plotted
+#' @param canvas.width The width of the canvas for the tkplot window
+#' @param canvas.height The height of the canvas for the tkplot window
+#' @param vertex.label.family The font family to use for vertex labels
 #' @return interactive TF network plot
 #' @export
 #' @import igraph
@@ -204,12 +247,15 @@ plot_interactive_tfnetwork <- function(network,
          clean.on.unload=FALSE)
 }
 
-#' @title Plot 3D TF network
-#' @param network TF network
-#' @return 3d TF network plot
+#' @title Plot a 3D TF network using tkplot from igraph
+#' @description This function plots the input network as a 3D network graph using the rgl package.
+#' @param network an igraph object representing the network to plot
+#' @return A 3D network graph plot.
 #' @export
 #' @import igraph
 #' @import rgl
+#' @examples
+#' plot_3d_tfnetwork(network)
 plot_3d_tfnetwork <- function(network)
 {
   rglplot(network)
