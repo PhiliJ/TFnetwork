@@ -27,7 +27,8 @@ install_github("PhiliJ/TFnetwork", dependencies = T)
 
 For example, for treated group and NC group:
 
-First thing first, you will need to prepare the expression table of genes. The first row of the table should be ENSEMBL or ENTREZID, and the second row
+First thing first, you will need to prepare the expression table of genes FOR EACH SAMPLE. 
+The first row of the table should be ENSEMBL or ENTREZID, and the second row
 should be the row count of each gene, then name these table like below.
 
 Then, you will need to define variables for expression data files, sample names, group assignments, and a comparison to be made between groups for later analyses.
@@ -58,3 +59,35 @@ You can use `?pre` for details.
 ``` r
 counts <- pre(counts = x$counts, groups = group, mouse = TRUE)
 ```
+
+
+### Step 2 DE-analysis for DEGs
+
+You can use either `DESeq2` or `limma` for DE-analysis.
+
+#### 2.1 DE-analysis using DESeq2
+
+Use `DiffDESeq2` after setting cutoff values of logFC (logfc), P-value (pval) and using adjusted P or not (padj). You can use `?DiffDESeq2` for details.
+
+``` r
+DErslt = DiffDESeq2 (counts = counts, phenodata, complist = compList, 
+                     logfc = 3, pval = 0.001, padj = TRUE)
+                     
+write.table(DErslt$table, file = "DESeq2_result.txt", sep = "\t")
+```
+
+#### 2.2 DE-analysis using limma
+
+Use `Difflimma` after setting cutoff values of logFC (logfc), P-value (pval) and using adjusted P or not (padj). You can use `?Difflimma` for details.
+
+``` r
+DErslt = Difflimma (counts = counts, phenodata = phenoData, complist = compList, 
+                     logfc = 3, pval = 0.001, padj = TRUE)
+                     
+write.table(DErslt$table, file = "limma_result.txt", sep = "\t", row.names = FALSE)
+``` r
+
+
+### Step 3 Identify significantly enriched TFs using NetAct
+#### 
+
