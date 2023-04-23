@@ -11,10 +11,6 @@ Unlike `NetAct`, `TFnetwork` only supports 2 groups, such as experiment group vs
 
 Li Lei <2020320243@stu.cqmu.edu.cn>
 
-Yajun Xie <yjxie@cqmu.edu.cn>
-
-Qin Zhou <zhouqin@cqmu.edu.cn>
-
 ### Installation:
 
 You can install `TFnetwork` like so:
