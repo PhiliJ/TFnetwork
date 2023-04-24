@@ -190,13 +190,14 @@ plot_highlighted_tfnetwork(network, highlight_node = "Pax8")
 
 
 #### 4.4 Plot interactive network
-Use `plot_interactive_tfnetwork`. 
+Use `plot_interactive_tfnetwork`. This allows you to move the node and adjust the layout.
 
 ``` r
 plot_interactive_tfnetwork(network,
                            canvas.width = 500, 
                            canvas.height = 500)
 ``` 
+![TF interactive network](https://user-images.githubusercontent.com/39685949/233880041-2f1fd2fa-0efa-46da-8185-e56be2f27a72.png)
 
 #### 4.4 Plot 3D network
 
