@@ -171,6 +171,20 @@ plot_tfnetwork(net,
 
 ![TFnet](https://user-images.githubusercontent.com/39685949/233879380-716ef378-ff9b-46e4-890d-935738614e69.png)
 
+Use `nodeshape = "sphere"` to draw a 3D network.
+
+``` r
+plot_tfnetwork(net,
+               pdf.name = "TFnet.pdf",
+               nodeshape = "sphere",
+               pdf.height = 15,
+               pdf.width = 15,
+               edge.arrow.size = 0.3,
+               vertex.label.family = "sans")
+``` 
+![TFnet_3d](https://user-images.githubusercontent.com/39685949/233880282-4bb26a40-011a-48b0-ad7d-447f59999054.png)
+
+
 #### 4.3 Highlight nodes of interest
 Use `plot_highlighted_tfnetwork`. `TFnetwork` will automatically determine whether your node of interest is a TF or a target. You may need to check the details using `?plot_highlighted_tfnetwork`.
 
@@ -200,7 +214,8 @@ plot_interactive_tfnetwork(network,
 ![TF interactive network](https://user-images.githubusercontent.com/39685949/233880041-2f1fd2fa-0efa-46da-8185-e56be2f27a72.png)
 
 #### 4.4 Plot 3D network
-
+Just for fun :)
 ``` r
 plot_3d_tfnetwork(network)
 ``` 
+![3d](https://user-images.githubusercontent.com/39685949/233880193-456b198d-25f4-46ab-910e-ed38f7ff2f53.png)
