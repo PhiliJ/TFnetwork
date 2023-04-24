@@ -156,7 +156,7 @@ Cons_net(mouse = TRUE)
 ```
 
 #### 4.2 Plot TF-target network
-Use `plot_tfnetwork`. You may need to check the details using `?plot_tfnetwork`.
+Use `plot_tfnetwork`. Red color stands for "up-regulated" while blue stands for "down-regulated". You may need to check the details using `?plot_tfnetwork`. 
 
 ``` r
 plot_tfnetwork(net,
@@ -168,13 +168,25 @@ plot_tfnetwork(net,
                vertex.label.family = "sans")
 ``` 
 
+![TFnet](https://user-images.githubusercontent.com/39685949/233879380-716ef378-ff9b-46e4-890d-935738614e69.png)
+
 #### 4.3 Highlight nodes of interest
 Use `plot_highlighted_tfnetwork`. `TFnetwork` will automatically determine whether your node of interest is a TF or a target. You may need to check the details using `?plot_highlighted_tfnetwork`.
-For example:
+
+For example, for TF like Gli2:
 
 ``` r
 plot_highlighted_tfnetwork(network, highlight_node = "Gli2")
 ``` 
+![TFnet_highlight_Gli2](https://user-images.githubusercontent.com/39685949/233879439-a2191bd4-07c3-4f26-bf41-318d841a1b5d.png)
+
+And for target like Pax8:
+
+``` r
+plot_highlighted_tfnetwork(network, highlight_node = "Pax8")
+``` 
+![TFnet_highlight_Pax8](https://user-images.githubusercontent.com/39685949/233879481-6b7b03d8-c658-4839-9e7e-39f26307a9f3.png)
+
 
 #### 4.4 Plot interactive network
 Use `plot_interactive_tfnetwork`. 
