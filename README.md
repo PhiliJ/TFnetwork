@@ -132,12 +132,13 @@ acts_mat = act.me$all_activities
 Then, use `TF_heatmap` to draw the heatmap with TF activities and expressions.
 
 ``` r
-pdf("TF_heatmap.pdf", width = 4, height = 20)
+pdf("TF_heatmap.pdf", width = 4, height = 9)
 heatmap2 <- TF_heatmap(acts_mat, neweset)
 heatmap2
 dev.off()
 ```
 
+![TF_heatmap](https://user-images.githubusercontent.com/39685949/233879806-08290313-1676-4e7a-b4bd-a06da0a45591.png)
 
 ### Step 4 TF-Target Network
 #### 4.1 Construct TF-target network
