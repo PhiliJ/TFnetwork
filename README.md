@@ -3,15 +3,13 @@
 
 What you need to do is simple: just input the expression matrix, and you will get the differentially-expression genes(DEGs), TFs with altered activity, a heatmap for TF activity and expression, TF-target network file and network plot. 
 
-Unlike `NetAct`, `TFnetwork` only supports 2 groups, such as experiment group vs negative control.
+Unlike `NetAct`, `TFnetwork` only supports 2 groups, such as experiment group vs negative control. I will update soon I finished my current project.
 
 `TFnetwork` is licensed under the GNU General Public License v3.0 https://github.com/PhiliJ/TFnetwork/blob/main/LICENSE
 
 ### Author
 
-Li Lei <2020320243@stu.cqmu.edu.cn>
-
-Guozhi Zhao <2020320060@stu.cqmu.edu.cn>
+Li Lei <academic@stu.cqmu.edu.cn>
 
 ### Installation:
 
